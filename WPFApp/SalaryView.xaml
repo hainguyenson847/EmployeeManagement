@@ -1,0 +1,70 @@
+﻿<Window x:Class="WPFApp.SalaryView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFApp"
+        mc:Ignorable="d"
+        Title="Quản lý lương" Height="600" Width="900" WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <local:SideMenu Grid.Column="0"/>
+
+
+        <StackPanel Grid.Column="1" Margin="20,20,20,0">
+            <TextBlock Text="Danh sách lương" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" Foreground="#4A90E2"/>
+            <DataGrid x:Name="SalaryDataGrid" AutoGenerateColumns="False" Height="Auto" 
+                      Margin="0,10,0,0" CanUserAddRows="False" Width="Auto"
+                      SelectionChanged="SalaryDataGrid_SelectionChanged"
+                      Background="#FFFFFF" BorderBrush="#4A90E2" BorderThickness="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID Lương" Binding="{Binding SalaryId}" Width="*"/>
+                    <DataGridTextColumn Header="Tên Nhân Viên" Binding="{Binding Employee.FullName}" Width="*"/>
+                    <DataGridTextColumn Header="ID Nhân Viên" Binding="{Binding EmployeeId}" Width="*"/>
+                    <DataGridTextColumn Header="Lương Cơ Bản" Binding="{Binding BaseSalary}" Width="*"/>
+                    <DataGridTextColumn Header="Phụ Cấp" Binding="{Binding Allowance}" Width="*"/>
+                    <DataGridTextColumn Header="Thưởng" Binding="{Binding Bonus}" Width="*"/>
+                    <DataGridTextColumn Header="Phạt" Binding="{Binding Penalty}" Width="*"/>
+                    <DataGridTextColumn Header="Tổng Thu Nhập" Binding="{Binding TotalIncome}" Width="*"/>
+                    <DataGridTextColumn Header="Ngày Thanh Toán" Binding="{Binding PaymentDate}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Margin="0,10,0,0" Height="Auto" DataContext="{Binding SelectedSalary}">
+                <TextBlock Text="ID Lương:"/>
+                <TextBox x:Name="SalaryIdTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+
+                <TextBlock Text="Tên Nhân Viên:"/>
+                <TextBox x:Name="EmployeeNameTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+
+                <TextBlock Text="ID Nhân Viên:"/>
+                <TextBox x:Name="EmployeeIdTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+
+                <TextBlock Text="Lương Cơ Bản:"/>
+                <TextBox x:Name="BaseSalaryTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+
+                <TextBlock Text="Phụ Cấp:"/>
+                <TextBox x:Name="AllowanceTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+
+                <TextBlock Text="Thưởng:"/>
+                <TextBox x:Name="BonusTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+
+                <TextBlock Text="Phạt:"/>
+                <TextBox x:Name="PenaltyTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+
+                <TextBlock Text="Ngày Thanh Toán:"/>
+                <TextBox x:Name="PaymentDateTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button Content="Thêm" Width="100" Margin="0,0,10,0" Click="AddSalaryButton_Click" Background="LightGreen" Foreground="White" Height="26"/>
+                    <Button Content="Sửa" Width="100" Margin="0,0,10,0" Click="EditSalaryButton_Click" Background="#4A90E2" Foreground="White" Height="26"/>
+                    <Button Content="Xóa" Width="100" Click="DeleteSalaryButton_Click" Background="#E94E77" Foreground="White"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

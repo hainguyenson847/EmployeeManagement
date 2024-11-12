@@ -1,0 +1,57 @@
+﻿<Window x:Class="WPFApp.AttendanceView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFApp"
+        mc:Ignorable="d"
+        Title="Quản lý chấm công" Height="600" Width="900" WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <local:SideMenu Grid.Column="0"/>
+
+        <StackPanel Grid.Column="1" Margin="20,20,20,0">
+            <TextBlock Text="Danh sách chấm công" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" Foreground="#4A90E2"/>
+            <DataGrid x:Name="AttendanceDataGrid" AutoGenerateColumns="False" Height="Auto" 
+                      Margin="0,10,0,0" CanUserAddRows="False" Width="Auto"
+                      SelectionChanged="AttendanceDataGrid_SelectionChanged"
+                      Background="#FFFFFF" BorderBrush="#4A90E2" BorderThickness="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID Chấm công" Binding="{Binding AttendanceId}" Width="*"/>
+                    <DataGridTextColumn Header="Tên Nhân Viên" Binding="{Binding Employee.FullName}" Width="*"/>
+                    <DataGridTextColumn Header="ID Nhân Viên" Binding="{Binding EmployeeId}" Width="*"/>
+                    <DataGridTextColumn Header="Ngày Chấm Công" Binding="{Binding Date}" Width="*"/>
+                    <DataGridTextColumn Header="Trạng Thái" Binding="{Binding Status}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <StackPanel Margin="0,10,0,0" Height="Auto" DataContext="{Binding SelectedAttendance}">
+                <TextBlock Text="ID Chấm công:"/>
+                <TextBox x:Name="AttendanceIdTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+
+                <TextBlock Text="Tên Nhân Viên:"/>
+                <TextBox x:Name="EmployeeNameTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+
+                <TextBlock Text="ID Nhân viên:"/>
+                <TextBox x:Name="EmployeeIdTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+
+                <TextBlock Text="Ngày Chấm Công:"/>
+                <TextBox x:Name="AttendanceDateTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+
+                <TextBlock Text="Trạng Thái:"/>
+                <TextBox x:Name="StatusTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button Content="Thêm" Width="100" Margin="0,0,10,0" Click="AddAttendanceButton_Click" Background="LightGreen" Foreground="White" Height="26"/>
+                    <Button Content="Sửa" Width="100" Margin="0,0,10,0" Click="EditAttendanceButton_Click" Background="#4A90E2" Foreground="White" Height="26"/>
+                    <Button Content="Xóa" Width="100" Click="DeleteAttendanceButton_Click" Background="#E94E77" Foreground="White"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,0 +1,42 @@
+﻿<Window x:Class="WPFApp.LeaveRequestView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFApp"
+        mc:Ignorable="d"
+        Title="Quản lý đơn xin nghỉ" Height="541" Width="900" WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <local:SideMenu Grid.Column="0"/>
+        
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock TextWrapping="Wrap" Text="Danh sách đơn" FontWeight="Bold" FontSize="18"/>
+            <DataGrid Margin="0,10,0,0" x:Name="LeaveRequestDataGrid" AutoGenerateColumns="False" Height="150"
+                      SelectionChanged="LeaveRequestDataGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Mã Đơn Nghỉ" Binding="{Binding LeaveRequestId}"/>
+                    <DataGridTextColumn Width="*" Header="Mã Nhân Viên" Binding="{Binding EmployeeId}"/>
+                    <DataGridTextColumn Width="*" Header="Lý do" Binding="{Binding LeaveType}"/>
+                    <DataGridTextColumn Width="*" Header="Ngày bắt đầu" Binding="{Binding StartDate}"/>
+                    <DataGridTextColumn Width="*" Header="Ngày kết thúc" Binding="{Binding EndDate}"/>
+                    <DataGridTextColumn Width="*" Header="Trạng thái" Binding="{Binding Status}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Margin="0,10,0,0" Height="308">
+                <TextBox TextWrapping="Wrap" x:Name="EmployeeNameText" Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox TextWrapping="Wrap" x:Name="DepartmentNameText" Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox TextWrapping="Wrap" x:Name="LeaveTypeText" Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox TextWrapping="Wrap" x:Name="StartDateText" Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox TextWrapping="Wrap" x:Name="EndDateText" Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <TextBox TextWrapping="Wrap" x:Name="StatusText"  Width="166" TextAlignment="Left" Padding="5" HorizontalAlignment="Left" Margin="5"/>
+                <Button Content="Approved" Width="88" Height="30" Background="LightGreen" HorizontalAlignment="Left" Margin="5" Click="ChangeStatus_Click"/>
+                <Button Content="Rejected" Width="88" Height="30" Background="Red" HorizontalAlignment="Left" Margin="5" Click="ChangeStatus_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

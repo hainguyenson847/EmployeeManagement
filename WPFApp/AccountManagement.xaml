@@ -1,0 +1,52 @@
+﻿<Window x:Class="WPFApp.AccountManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPFApp"
+        mc:Ignorable="d"
+        Title="Quản lý tài khoản" Height="592" Width="936" WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar Section -->
+        <local:SideMenu Grid.Column="0"></local:SideMenu>
+
+        <!-- Main Content Section -->
+        <StackPanel Grid.Column="1" Margin="20,10">
+            <TextBlock Text="Danh sách tài khoản" FontSize="18" FontWeight="Bold" Margin="0,0,0,10" Foreground="#4A90E2"/>
+
+            <DataGrid x:Name="AccountDataGrid" AutoGenerateColumns="False" Height="172"
+                      Margin="0,10,0,0" CanUserAddRows="False" Width="687"
+                      Background="#FFFFFF" BorderBrush="#4A90E2" BorderThickness="1" SelectionChanged="AccountDataGrid_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID Tài khoản" Binding="{Binding AccountId}" Width="*"/>
+                    <DataGridTextColumn Header="Tên đăng nhập" Binding="{Binding Username}" Width="*"/>
+                    <DataGridTextColumn Header="Vai trò" Binding="{Binding Role.RoleName}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Account Details Section -->
+            <StackPanel Margin="0,10,0,0" Width="686">
+                <TextBlock Text="ID Tài khoản:"/>
+                <TextBox x:Name="AccountIdTextBox" Margin="0,0,0,10" IsReadOnly="True" Background="#F0F0F0"/>
+                <TextBlock Text="Tên đăng nhập:"/>
+                <TextBox x:Name="UsernameTextBox" Margin="0,0,0,10" Background="#F0F0F0"/>
+                <TextBlock Text="Mật khẩu:"/>
+                <TextBox x:Name="PasswordTextBox" Background="#F0F0F0"/>
+                <TextBlock Text="Vai trò:"/>
+                <ComboBox x:Name="RoleCombobox" Height="28" Width="704"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                    <Button Content="Làm mới" Width="100" Margin="0,0,10,0" Background="DarkGray" Foreground="White" Click="Button_Click"/>
+                    <Button x:Name="AddAccount" Content="Thêm" Width="100" Margin="0,0,10,0" Background="LightGreen" Foreground="White" Height="26" Click="AddAccount_Click"/>
+                    <Button x:Name="EditAccount" Content="Sửa" Width="100" Margin="0,0,10,0" Background="#4A90E2" Foreground="White" Height="26" Click="EditAccount_Click"/>
+                    <Button x:Name="DeleteAccount" Content="Xóa" Width="100" Background="#E94E77" Foreground="White" Click="DeleteAccount_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
